@@ -23,7 +23,7 @@ h1 {
 .months-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
     justify-content: flex-start;
 }
 
@@ -43,7 +43,7 @@ h1 {
 .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
+    gap: 5px;
 }
 
 .day {
@@ -54,10 +54,26 @@ h1 {
     cursor: pointer;
     box-sizing: border-box;
     position: relative;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .day:hover {
     outline: 2px solid #333;
+    transform: scale(1.1);
+}
+
+.day.highlight {
+    outline: 2px solid #000;
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.days.dimmed .day {
+    opacity: 0.3;
+}
+
+.days.dimmed .day.highlight {
+    opacity: 1;
 }
 
 .empty-day {

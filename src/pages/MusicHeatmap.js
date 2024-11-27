@@ -13,6 +13,16 @@ const MusicHeatmap = () => {
   }, []);
 
   const handleMouseOver = (e, dayData, month, day, year) => {
+    const intensityLevel = e.target.dataset.songs;
+
+    document.querySelectorAll(`[data-songs="${intensityLevel}"]`).forEach((cell) => {
+      cell.classList.add('highlight');
+    });
+
+    document.querySelectorAll('.days').forEach((daysContainer) => {
+      daysContainer.classList.add('dimmed');
+    });
+
     setTooltip({
       visible: true,
       content: `Date: ${month}/${day}/${year}\nTotal Songs: ${dayData.totalSongs}\nMost Played: ${dayData.mostPlayedSong}\nDuration: ${dayData.totalDuration} mins`,
@@ -21,9 +31,20 @@ const MusicHeatmap = () => {
     });
   };
 
-  const handleMouseOut = () => {
+  const handleMouseOut = (e) => {
+    const intensityLevel = e.target.dataset.songs;
+
+    document.querySelectorAll(`[data-songs="${intensityLevel}"]`).forEach((cell) => {
+      cell.classList.remove('highlight');
+    });
+
+    document.querySelectorAll('.days').forEach((daysContainer) => {
+      daysContainer.classList.remove('dimmed');
+    });
+
     setTooltip({ visible: false, content: '', x: 0, y: 0 });
   };
+
 
   if (!data) return <div>Loading...</div>;
 
